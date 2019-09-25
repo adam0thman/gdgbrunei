@@ -6,14 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>GDG Brunei | Bid To WIn</title>
 
-  <!-- update the version number as needed -->
-  <script defer src="/__/firebase/6.6.2/firebase-app.js"></script>
-  <!-- include only the Firebase features as you need -->
-  <script defer src="/__/firebase/6.6.2/firebase-auth.js"></script>
-  <script defer src="/__/firebase/6.6.2/firebase-firestore.js"></script>
-  <!-- initialize the SDK after all desired features are loaded -->
-  <script defer src="/__/firebase/init.js"></script>
-
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -25,6 +17,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+  <script src="./js/functions.js"></script>
+
 </head>
 
 <body>
@@ -43,98 +37,70 @@
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Admin</a>
+          <a class="nav-link" href="#">T&C</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <form class="form-inline my-2 my-lg-0" autocomplete="off">
+        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Admin</button>
       </form>
     </div>
   </nav>
-
-  <div class="container">
-    <div class="mt-5 text-center">
-      <h1 class="display-3">Bid now! :)</h1>
-      <p class="lead">This is a public bidding site. Fill in your name, and bid amount below.</p>
-    </div>
-
-    <div class="mt-5 text-center">
-      <h1 class="display-4">Current bid is $<text id="txtCurrentBid" class="text-info"></text> by <text
-          id="txtCurrentBidder" class="text-info"></text>.
-      </h1>
-      <p class="lead">Bid was placed on <text id="txtCurrentBidTime" class="text-info"></text></p>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4"></div>
-      <div class="col-md-4 mt-5 text-center">
-        <form>
-          <div class="form-group">
-            <label for="inputName" class="sr-only">Name</label>
-            <input type="text" class="form-control form-control-lg text-center" id="inputName"
-              aria-describedby="nameHelp" placeholder="Enter your name & click Bid">
-            <small id="nameHelp" class="form-text text-muted">Just enter your name - be it fake or real.</small>
-          </div>
-        </form>
-        <button type="submit" class="btn btn-block btn-outline-primary" id="btnBid">Bid</button>
+  <!--
+      Main jumbotron for vieiwing Bid items, and updated Bid value.
+    -->
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="display-4">Fake DevFest19 Tickets!</h1>
+        <p class="lead">How bad do you want to physically attend DevFest19@Mexico? Bid your way right now!.</p>
       </div>
-      <div class="col-md-4"></div>
+
+      <hr class="mb-12">
+
+      <div class="mt-5 d-flex flex-row">
+        <div class="col-md-3">
+          <img src="images/devfest2.png" class="img-fluid" style="width: 100%;" alt="DevFest 2019 Mexico">
+        </div>
+        <div class="col-md-9">
+          <div class="=">
+            <p class="display-4">Current bid is BND $<text id="txtCurrentBid" class="text-info" data-toggle="tooltip"
+                data-placement="top" title="Bid Time"></text> by <text id="txtCurrentBidder" class="text-info"></text>.
+            </p>
+            <p class="lead sr-only">Bid was placed on <text id="txtBidTime" class="text-info"></text></p>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 mt-5 text-center">
+      <form>
+        <div class="form-group">
+          <label for="inputName" class="sr-only">Name</label>
+          <input type="text" class="form-control form-control-lg text-center" id="inputName" aria-describedby="nameHelp"
+            placeholder="Enter your name & click Bid. amount will increased by $13">
+          <small id="nameHelp" class="form-text text-muted">Just enter your name - be it fake or real.</small>
+        </div>
+      </form>
+      <button type="submit" class="btn btn-block btn-outline-primary" id="btnBid" disabled>Bid</button>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
 
 
   </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-      // // The Firebase SDK is initialized and available here!
-      //
-      // firebase.auth().onAuthStateChanged(user => { });
-      // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-      // firebase.messaging().requestPermission().then(() => { });
-      // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-      //
-      // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-      try {
-        let app = firebase.app();
-        let features = ['auth', 'database', 'messaging', 'storage', 'firestore'].filter(feature => typeof app[feature] === 'function');
-        //document.getElementById('infoload').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-      } catch (e) {
-        console.error("Error: " + e);
-        //document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
-      }
-
-
-      const db = firebase.firestore();
-      db.collection("currentbid").doc("currentbid")
-        .onSnapshot({
-          // Listen for document metadata changes
-          includeMetadataChanges: true
-        }, function (bidDoc) {
-          console.log("bidDoc is: " + JSON.stringify(bidDoc.data()));
-          $('#txtCurrentBid').text(bidDoc.data().amount);
-          $('#txtCurrentBidder').text(bidDoc.data().bidder);
-          $('#txtCurrentBidTime').text(bidDoc.data().timestamp.toDate());
-        });
-
-      $('#btnBid').on('click', function () {
-        var bidderName = $('#inputName').val();
-        var docRef = db.collection('currentbid').doc('currentbid');
-        docRef.update({
-          amount: firebase.firestore.FieldValue.increment(0.01),
-          bidder: bidderName,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        }).then(()=>{
-          console.log('Done updatee!');
-        }).catch((e) => {
-          console.log('Error updating data: '+e);
-        });
-      });
-    });
-
-  </script>
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/6.6.2/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/6.6.2/firebase-auth.js"></script>
+  <script defer src="/__/firebase/6.6.2/firebase-firestore.js"></script>
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="/__/firebase/init.js"></script>
+  <!-- Our main app. -->
+  <script src="./js/main.js"></script>
 </body>
 
 </html>
