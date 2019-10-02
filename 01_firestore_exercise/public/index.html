@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>GDG + WTM | Firebase Series #1: Real-Time Web App with Firestore</title>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <!--
+    This portion is the Navigation Bar at top of the page.
+  -->
+  <nav class="container navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand font-weight-bold text-info" href="#">GDG</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">T&C</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0" autocomplete="off">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Admin</button>
+      </form>
+    </div>
+  </nav>
+
+  <!--
+      Main jumbotron for viewing Bid items, and updated Bid value.
+  -->
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <!--
+        The main heading.
+      -->
+      <div class="text-center">
+        <h1 class="display-4">#DevFest19 Tickets!</h1>
+        <p class="lead">How bad do you want to physically attend DevFest 2019 Madrid? Bid your way right now!</p>
+      </div>
+
+      <!--
+        After the heading, body is divided into two columns.
+        Left column is to view the bidding item image, as well as the actual bidding form/button.
+        Right column will be to display the highest bidder, and the last 10 bids.
+      -->
+      <div class="mt-5 d-flex flex-row">
+        <!--
+          The left column, placeholder the bid item image and the bidding form.
+        -->
+        <div class="col-md-4 text-center">
+          <!--
+            Bidding item placeholder.
+          -->
+          <div class="border border-info">
+            <img src="images/wtm-logo.jpg" class="img-fluid" style="height: 120px, width: 100%;"
+              alt="DevFest 2019 Mexico">
+          </div>
+          <hr class="mb-4">
+          <form autocomplete="off">
+            <!--
+              Input field for name.
+            -->
+            <div class="form-group">
+              <label for="inputName" class="sr-only">Name</label>
+              <input type="text" class="form-control form-control-lg text-center" id="inputName"
+                aria-describedby="nameHelp" placeholder="Your name here..">
+              <small id="nameHelp" class="form-text text-muted">Enter your name & click bid.</small>
+            </div>
+            <!--
+              Radiobutton to select increment amount for Bidding
+            -->
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="bidAmount" id="inlineRadio1" value="10" checked>
+              <label class="form-check-label" for="inlineRadio1"><text class="font-weight-bold">+</text>$10</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="bidAmount" id="inlineRadio2" value="21">
+              <label class="form-check-label" for="inlineRadio2"><text class="font-weight-bold">+</text>$21</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="bidAmount" id="inlineRadio3" value="38">
+              <label class="form-check-label" for="inlineRadio2"><text class="font-weight-bold">+</text>$38</label>
+            </div>
+            <!--
+              Button to Bid
+            -->
+            <div class="mt-4"></div>
+            <button type="submit" class="btn btn-block btn-success" id="btnBid" disabled>Bid</button>
+          </form>
+        </div>
+        <!--
+          The right column, to show highest bidder and last 10 bids.
+        -->
+        <div class="col-md-8">
+          <!--
+              Placeholder for displaying highest bidder and latest running amount.
+          -->
+          <p class="h2">Highest bid is BND $<text id="txtCurrentBid" class="text-info"></text> by <text
+              id="txtCurrentBidder" class="text-info"></text>.</p>
+          <!--
+              Placeholder for displaying previous 10 bids.
+          -->
+          <hr class="mb-4">
+          <p class="h5">Previous 10 bids:</p>
+          <div id="prev_bids" class="well"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+  <!--
+    The main section where we include Firebase SDK, and intilize our Firebase.
+    This style of loading scripts is only applicable if we are using Firebase Hosting.
+    Our webapp logic and opration will be in main.js - also included this AFTER all firebase SDKs.
+  -->
+  <!-- Update the version number as needed -->
+  <script defer src="/__/firebase/6.6.2/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/6.6.2/firebase-firestore.js"></script>
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="/__/firebase/init.js"></script>
+  <!-- Our main app. -->
+  <script src="./js/main.js"></script>
+</body>
+
+</html>
