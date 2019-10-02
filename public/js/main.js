@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(querySnapshot)
       $('#prev_bids').empty()
       querySnapshot.forEach(function(doc) {
-        var text = doc.data().bidder + " bid " + doc.data().amount
+        var text = "<text class=\"text-info text-capitalize\">" + doc.data().bidder + "</text> bids <text class=\"text-info\">" + doc.data().amount + "</text> on <text class=\"text-info\">" + doc.data().timestamp.toDate() + "</text>"
         console.log(text)
          $('#prev_bids').append('<li>'+ text +'</li>')
         // var listItem = document.createElement('li')

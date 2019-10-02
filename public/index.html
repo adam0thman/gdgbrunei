@@ -61,17 +61,28 @@
       <div class="mt-5 d-flex flex-row">
         <div class="col-md-3">
           <img src="images/devfest2.png" class="img-fluid" style="width: 100%;" alt="DevFest 2019 Mexico">
+          <form>
+            <div class="form-group">
+              <label for="inputName" class="sr-only">Name</label>
+              <input type="text" class="form-control form-control-lg text-center" id="inputName"
+                aria-describedby="nameHelp" placeholder="Name here..">
+              <small id="nameHelp" class="form-text text-muted">Enter your name & click bid.</small>
+            </div>
+            <button type="submit" class="btn btn-block btn-outline-primary" id="btnBid" disabled>Bid</button>
+          </form>
         </div>
         <div class="col-md-9">
           <div class="=">
             <p class="display-4">Current bid is BND $<text id="txtCurrentBid" class="text-info" data-toggle="tooltip"
                 data-placement="top" title="Bid Time"></text> by <text id="txtCurrentBidder" class="text-info"></text>.
             </p>
-            
-            <p class="lead sr-only">Bid was placed on <text id="txtBidTime" class="text-info"></text></p>
-            <p> Previous bids:
-            <ul id="prev_bids"></ul>
-            </p>
+
+            <!--
+              Below are the placeholder for displaying previous 10 bids.
+            -->
+            <p class="lead">Previous bids:</p>
+            <ul id="prev_bids" class="list-unstyled"></ul>
+
           </div>
         </div>
       </div>
@@ -81,15 +92,7 @@
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4 mt-5 text-center">
-      <form>
-        <div class="form-group">
-          <label for="inputName" class="sr-only">Name</label>
-          <input type="text" class="form-control form-control-lg text-center" id="inputName" aria-describedby="nameHelp"
-            placeholder="Enter your name & click Bid. amount will increased by $13">
-          <small id="nameHelp" class="form-text text-muted">Just enter your name - be it fake or real.</small>
-        </div>
-      </form>
-      <button type="submit" class="btn btn-block btn-outline-primary" id="btnBid" disabled>Bid</button>
+
     </div>
     <div class="col-md-4"></div>
   </div>
