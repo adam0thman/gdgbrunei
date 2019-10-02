@@ -46,6 +46,7 @@
       </form>
     </div>
   </nav>
+
   <!--
       Main jumbotron for vieiwing Bid items, and updated Bid value.
     -->
@@ -56,19 +57,45 @@
         <p class="lead">How bad do you want to physically attend DevFest19@Mexico? Bid your way right now!.</p>
       </div>
 
-      <hr class="mb-12">
+      <!--
+        Placeholder for alerts
+      -->
+      <div id="divAlert" class="container text-center font-weight-bold">
+        <div class="alert alert-danger" role="alert">
+          Hurry Up!
+        </div>
+      </div>
 
       <div class="mt-5 d-flex flex-row">
-        <div class="col-md-3">
+        <div class="col-md-3 text-center">
           <img src="images/devfest2.png" class="img-fluid" style="width: 100%;" alt="DevFest 2019 Mexico">
           <form>
             <div class="form-group">
               <label for="inputName" class="sr-only">Name</label>
-              <input type="text" class="form-control form-control-lg text-center" id="inputName"
-                aria-describedby="nameHelp" placeholder="Name here..">
+              <input type="text" class="form-control form-control-lg border border-primary" id="inputName"
+                aria-describedby="nameHelp" placeholder="Your name here..">
               <small id="nameHelp" class="form-text text-muted">Enter your name & click bid.</small>
             </div>
-            <button type="submit" class="btn btn-block btn-outline-primary" id="btnBid" disabled>Bid</button>
+            <!--
+              Amount for Bidding
+            -->
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="bidAmount" id="inlineRadio1" value="10" checked>
+              <label class="form-check-label" for="inlineRadio1">$10</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="bidAmount" id="inlineRadio2" value="21">
+              <label class="form-check-label" for="inlineRadio2">$21</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="bidAmount" id="inlineRadio3" value="38">
+              <label class="form-check-label" for="inlineRadio2">$38</label>
+            </div>
+            <!--
+              To button to Bid
+            -->
+            <div class="mt-4"></div>
+            <button type="submit" class="btn btn-block btn-primary" id="btnBid" disabled>Bid</button>
           </form>
         </div>
         <div class="col-md-9">
@@ -80,21 +107,15 @@
             <!--
               Below are the placeholder for displaying previous 10 bids.
             -->
-            <p class="lead">Previous bids:</p>
-            <ul id="prev_bids" class="list-unstyled"></ul>
+            <hr class="mb-4">
+            <p class="h5">Previous 10 bids:</p>
+            <br />
+            <div id="prev_bids" class="well"></div>
 
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4 mt-5 text-center">
-
-    </div>
-    <div class="col-md-4"></div>
   </div>
 
 
@@ -107,7 +128,7 @@
   <!-- initialize the SDK after all desired features are loaded -->
   <script defer src="/__/firebase/init.js"></script>
   <!-- Our main app. -->
-  <script src="./js/main.js"></script>
+  <script src="./js/main2.js"></script>
 </body>
 
 </html>
