@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
   //     }, 3000);
   //   }).catch((e) => {
   //     console.log('Error updating data: ' + e);
-    });
+    // });
   });
 
   /*
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       $('#btnBid').prop('disabled', true);
     }
-
+  })
 
 });
 
