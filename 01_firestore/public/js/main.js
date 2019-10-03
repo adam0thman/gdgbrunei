@@ -33,12 +33,12 @@ document.addEventListener('DOMContentLoaded', function () {
       // Listen for document metadata changes
       includeMetadataChanges: true
     }, function (bidDoc) {
-      // Afetr querying the document, the return is a javascript object, under variable bidDoc
-      // We can tetst this witha  simpoel console.log as below:
+      // After querying the document, the return is a javascript object, under variable bidDoc
+      // We can test this with a simple console.log as below:
       console.log(bidDoc.data());
-      // We populatethe 'ámount'into its HTML placeholder
+      // We populate 'amount' into it's HTML placeholder
       $('#txtCurrentBid').text(bidDoc.data().amount);
-      // We populatethe 'current bidder' into its HTML placeholder
+      // We populate the 'current bidder' into its HTML placeholder
       $('#txtCurrentBidder').text(bidDoc.data().bidder);
     });
 
